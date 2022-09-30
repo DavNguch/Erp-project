@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Dashboard</title>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+	<body>
+
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/help">Help</a></li>
+						<li><a href="/logout">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-3 col-md-2 sidebar">
+					<h3>Hello, {{user.username}}</h3>
+					<ul class="nav nav-sidebar">
+						<li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+						<li><a href="/help">Help</a></li>
+						{% for guy in guys %}
+						{% if guy.is_superuser %}
+						<li><a href="/user_detail">Users</a></li>
+						{% endif %}
+						{% endfor %}
+						<li><a href="/logout">Logout</a></li>
+					</ul>
+				</div>
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+					<div class="row placeholders">
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="{% static 'images/airmax.jpg' %}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Sneakers</h4>
+						</div>
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="{% static 'images/boots.jpg' %}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Boots</h4>
+						</div>
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="{% static 'images/shoe2.jpg' %}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Sandals</h4>
+						</div>
+						<div class="col-xs-6 col-sm-3 placeholder">
+							<img src="{% static 'images/shoe3.jpg' %}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+							<h4>Canvas</h4>
+						</div>
+					</div>
+
+					<h2 class="sub-header">Inventory</h2>
+					<div class="table-responsive">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>Type</th>
+									<th>Brand</th>
+									<th>Size</th>
+									<th>Colour</th>
+									<th>Price</th>
+									<th>Quantity</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for Inv in Invs %}
+								<tr>
+									<td>{{Inv.Type}}</td>
+									<td>{{Inv.Brand}}</td>
+									<td>{{Inv.Size}}</td>
+									<td>{{Inv.Colour}}</td>
+									<td>{{Inv.Price}}</td>
+									<td>{{Inv.Quantity}}</td>
+								</tr>
+								{% endfor %}
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Bootstrap core JavaScript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	</body>
+</html>
